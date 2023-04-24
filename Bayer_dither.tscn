@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://dhts7i1ae0spj"]
+
+[ext_resource type="Shader" uid="uid://df06s7ocwswmc" path="res://bayer_dither.tres" id="2_umyvn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0rmrr"]
+shader = ExtResource("2_umyvn")
+
+[node name="Bayer_Dither" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_0rmrr")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://drgfnlwgl82h8"]
+
+[ext_resource type="Shader" path="res://crosshatch.gdshader" id="1_jqsta"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0rmrr"]
+shader = ExtResource("1_jqsta")
+
+[node name="Crosshatch" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_0rmrr")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

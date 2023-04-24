@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8m37o2dax41l"]
+
+[ext_resource type="Shader" path="res://vhs.gdshader" id="2_hg1xt"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0rmrr"]
+shader = ExtResource("2_hg1xt")
+shader_parameter/shake = 1.38
+shader_parameter/noiseQuality = 7.7
+shader_parameter/noiseIntensity = 0.001
+shader_parameter/offsetIntensity = 0.05
+shader_parameter/colorOffsetIntensity = 0.536
+
+[node name="Video" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_0rmrr")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
