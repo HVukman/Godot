@@ -1,0 +1,108 @@
+[gd_scene load_steps=13 format=3 uid="uid://c515xipf4ytnk"]
+
+[ext_resource type="ArrayMesh" uid="uid://dpkmu3s4bt4js" path="res://assets/untitled.obj" id="1_d5efe"]
+[ext_resource type="Shader" uid="uid://df06s7ocwswmc" path="res://bayer_dither.tres" id="1_g0kdm"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_esa06"]
+shader = ExtResource("1_g0kdm")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ugxa0"]
+
+[sub_resource type="Animation" id="Animation_pm4r1"]
+resource_name = "new_animation"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Untitled:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 3.14159, 0), Vector3(0, 6.28319, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_snpv8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Untitled:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0fqdl"]
+_data = {
+"RESET": SubResource("Animation_snpv8"),
+"new_animation": SubResource("Animation_pm4r1")
+}
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_7ui5k"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h1i73"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lfrdx"]
+sky_top_color = Color(0.164706, 0.458824, 0.760784, 1)
+sky_curve = 0.487351
+ground_bottom_color = Color(0.0862745, 0.0588235, 0.0235294, 1)
+
+[sub_resource type="Sky" id="Sky_poras"]
+sky_material = SubResource("ProceduralSkyMaterial_lfrdx")
+
+[sub_resource type="Environment" id="Environment_8m5at"]
+background_mode = 2
+sky = SubResource("Sky_poras")
+tonemap_mode = 1
+
+[node name="TEST_CRT" type="Node3D"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+material = SubResource("ShaderMaterial_esa06")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Untitled" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_d5efe")
+surface_material_override/0 = SubResource("StandardMaterial3D_ugxa0")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Untitled"]
+root_node = NodePath("../../MeshInstance3D")
+autoplay = "new_animation"
+libraries = {
+"": SubResource("AnimationLibrary_0fqdl")
+}
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.363)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(2.302, 0, 0, 0, 2.302, 0, 0, 0, 2.302, 0, -1.4056, 0)
+mesh = SubResource("PlaneMesh_7ui5k")
+surface_material_override/0 = SubResource("StandardMaterial3D_h1i73")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.53856, 0, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_8m5at")
